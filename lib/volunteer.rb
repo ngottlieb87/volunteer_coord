@@ -1,9 +1,10 @@
 class Volunteer
-  attr_reader :name, :project_id
+  attr_reader :name, :id, :project_id
 
   def initialize(attributes)
     @name = attributes[:name]
     @project_id = attributes[:project_id]
+    @id= attributes[:id]
   end
 
   def ==(another_volunteer)
@@ -19,6 +20,15 @@ class Volunteer
       all_volunteers.push(Volunteer.new({:name => name, :project_id=> project_id}))
     end
     all_volunteers
+  end
+
+  def self.find(id)
+    Volunteer.all.each do |volunteer|
+      if volunteer.id.==(id)
+        return volunteer
+      end
+    end
+    return nil
   end
 
   def save
