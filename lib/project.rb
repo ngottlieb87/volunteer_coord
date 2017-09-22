@@ -8,22 +8,31 @@ class Project
 
 
   def self.all
-    project_titles = DB.exec("SELECT * FROM projects;")
-    titles = []
-    projects_titles.each do |title|
-      title = title["title"]
-      id = title["id"].to_i
-      titles.push(Title.new({:title=> title, :id=> id}))
+    projects = DB.exec("SELECT * FROM projects;")
+    all_projects = []
+    projects.each do |project|
+      title = project["title"]
+      id = project["id"].to_i
+      all_projects.push(Project.new({:title=> title, :id=> id}))
     end
-    titles
+    all_projects
   end
 
   def ==(another_project)
     self.title.==(another_project.title).&(self.id.==(another_project.id))
   end
 
+  def self.find(id)
+    Project.all.each do |project|
+      if project.id.==(id)
+        return project
+      end
+    end
+    return nil
+  end
+
+
   def save
-    result= DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING id;")
-    @id = result.first.fetch("id").to_i()
+    @id= DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING id;").first.fetch("id").to_i()
   end
 end

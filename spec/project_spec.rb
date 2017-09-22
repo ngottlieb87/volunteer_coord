@@ -16,12 +16,12 @@ RSpec.describe Project do
     end
   end
 
-    it 'returns the id of the project after saving project' do
-      project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
-      project.save
-      expect(project.id).to eq(1)    # be_an_instance_of Integer?
-    end
-  end
+  #   it 'returns the id of the project after saving project' do
+  #     project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+  #     project.save
+  #     expect(project.id).to be_an_instance_of Integer
+  #   end
+  # end
 
 
   describe '#==' do
@@ -32,37 +32,37 @@ RSpec.describe Project do
     end
   end
 
-  # context '.all' do
-  #   it 'is empty to start' do
-  #     expect(Project.all).to eq []
-  #   end
+  context '.all' do
+    it 'is empty to start' do
+      expect(Project.all).to eq []
+    end
 
-  #   it 'returns all projects' do
-  #     project1 = Project.new({:title => 'Teaching Kids to Code', :id => nil})
-  #     project1.save
-  #     project2 = Project.new({:title => 'Teaching Ruby to Kids', :id => nil})
-  #     project2.save
-  #     expect(Project.all).to eq [project1, project2]
-  #   end
-  # end
-  #
-  # describe '#save' do
-  #   it 'saves a project to the database' do
-  #     project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
-  #     project.save
-  #     expect(Project.all).to eq [project]
-  #   end
-  # end
-  #
-  # describe '.find' do
-  #   it 'returns a project by id' do
-  #     project1 = Project.new({:title => 'Teaching Kids to Code', :id => nil})
-  #     project1.save
-  #     project2 = Project.new({:title => 'Teaching Ruby to Kids', :id => nil})
-  #     project2.save
-  #     expect(Project.find(project1.id)).to eq project1
-  #   end
-  # end
+    it 'returns all projects' do
+      project1 = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+      project1.save
+      project2 = Project.new({:title => 'Teaching Ruby to Kids', :id => nil})
+      project2.save
+      expect(Project.all()).to eq [project1, project2]
+    end
+  end
+
+  describe '#save' do
+    it 'saves a project to the database' do
+      project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+      project.save
+      expect(Project.all).to eq [project]
+    end
+  end
+  
+  describe '.find' do
+    it 'returns a project by id' do
+      project1 = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+      project1.save
+      project2 = Project.new({:title => 'Teaching Ruby to Kids', :id => nil})
+      project2.save
+      expect(Project.find(project1.id)).to eq project1
+    end
+  end
   #
   # describe '#volunteers' do
   #   it 'returns all volunteers for a specific project' do
@@ -93,4 +93,4 @@ RSpec.describe Project do
   #     expect(Project.all).to eq []
   #   end
   # end
-# end
+end
