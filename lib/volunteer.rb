@@ -16,9 +16,13 @@ class Volunteer
     volunteers.each do |volunteer|
       name = volunteer["name"]
       project_id = volunteer["project_id"].to_i
-      all_volunteers.push(Project.new({:name => name, :project_id=> project_id}))
+      all_volunteers.push(Volunteer.new({:name => name, :project_id=> project_id}))
     end
     all_volunteers
+  end
+
+  def save
+    DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', '#{@project_id}') RETURNING id;")
   end
 
 end
