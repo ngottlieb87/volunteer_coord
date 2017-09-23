@@ -28,8 +28,9 @@ get('/project/:id/volunteer') do
 end
 
 post('/project/:id/volunteer') do
-  volunteer = Volunteer.new({:name=>["name"],:id=>nil, :project_id=>["project_id"]})
+  volunteer = Volunteer.new({:name=>["name"], :project_id=>["project_id"]})
   volunteer.save
+  'project/<%=project.id %>'+ params['project_id']
 end
 
 get('/project/:id/update') do
