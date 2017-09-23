@@ -7,7 +7,7 @@ require ('pry')
 require ('capybara')
 require('pg')
 
-DB = PG.connect({:dbname => "volunteer_tracker"})
+DB = PG.connect({:dbname => 'volunteer_tracker'})
 
 get('/') do
   @projects_list= Project.all()
@@ -22,6 +22,16 @@ post('/') do
   erb(:index)
 end
 
+get('/project/:id/volunteer') do
+  @project = Project.find(params["id"].to_i())
+  erb(:volunteers)
+end
+
+post('/project/:id/volunteer') do
+  volunteer = Volunteer.new({:name=>["name"],:id=>nil, :project_id=>["project_id"]})
+  volunteer.save
+end
+
 get('/project/:id/update') do
   @project_edit= Project.find(params.fetch("id").to_i())
   erb(:details)
@@ -32,6 +42,7 @@ get('/project/:id/') do
   erb(:edit_project)
 end
 
+
 get('/project/:id/edit') do
   @project_edit= Project.find(params.fetch("id").to_i())
   erb(:edit_project)
@@ -41,6 +52,13 @@ patch('/project/:id') do
   title = params.fetch("title")
   @project_edit= Project.find(params.fetch("id").to_i())
   @project_edit.update({:title => title})
+  @projects_list = Project.all()
+  erb(:index)
+end
+
+delete('/project/:id') do
+  @project_edit = Project.find(params.fetch("id").to_i())
+  @project_edit.delete()
   @projects_list = Project.all()
   erb(:index)
 end
