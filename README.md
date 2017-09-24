@@ -28,7 +28,7 @@ _This webpage will let a volunteer event coordinator update projects, add volunt
 | ------------- |:-------------:| -----:|
 | Receives a project title and displays it in a list to the top of the page | "Potluck in the park" | "Potluck in the park" |
 | Can add multiple projects to be displayed | "Trash Pick Up"| "Trash Pick Up" |
-| | | "Trash Pick Up" |
+| | | "Potluck in the park" |
 | Click on project and takes you to a new page where you will be able to add volunteers for the project |  "Tommy, Samantha, Dorothy" | "Tommy, Samantha, Dorothy"|
 | update project name | Potluck in the Park | Trash pick up => Potluck in the park |
 |delete project and its volunteers | delete button | *project removed from list*|

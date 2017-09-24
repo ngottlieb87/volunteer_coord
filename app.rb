@@ -28,9 +28,12 @@ get('/project/:id/volunteer') do
 end
 
 post('/project/:id/volunteer') do
-  volunteer = Volunteer.new({:name=>["name"], :project_id=>["project_id"]})
+  @project = Project.find(params["id"].to_i())
+  name = params["name"]
+  project_id = @project_id
+  volunteer = Volunteer.new({:name => name, :project_id => project_id, :id => nil})
   volunteer.save
-  'project/<%=project.id %>'+ params['project_id']
+  erb(:volunteers)
 end
 
 get('/project/:id/update') do
@@ -59,7 +62,7 @@ end
 
 delete('/project/:id') do
   @project_edit = Project.find(params.fetch("id").to_i())
-  @project_edit.delete()
+  @project_edit.delete
   @projects_list = Project.all()
   erb(:index)
 end
