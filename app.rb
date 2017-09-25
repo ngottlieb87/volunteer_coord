@@ -32,15 +32,16 @@ end
 post('/project/:id/volunteer') do
   @project = Project.find(params["id"].to_i())
   name = params.fetch("name")
-  project_id = @project_id
+  project_id = params.fetch("project_id").to_i
   volunteer = Volunteer.new({:name => name, :project_id => project_id})
   volunteer.save
-  @volunteers = Volunteer.find(params[:id])
+  @volunteers= Volunteer.all()
   erb(:volunteers)
 end
 
 get('/project/:id/update') do
   @project_edit= Project.find(params.fetch("id").to_i())
+  @volunteers= Volunteer.all()
   erb(:details)
 end
 

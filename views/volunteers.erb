@@ -1,10 +1,10 @@
 <h1> <%= @project.title() %></h1>
 
-<% if @volunteers.any? %>
+<% if @project.volunteers.any? %>
   <h4> Volunteers currently on the project:</h4>
     <ul>
-      <% @volunteers.each() do |volunteer| %>
-      <li>Name: <% volunteer.name %></li>
+      <% @project.volunteers.each() do |volunteer| %>
+      <li>Name:<a href="/project/<%=@project.id()%>/edit>"><%= volunteer.name %></li></a>
       <% end %>
     </ul>
 
@@ -15,7 +15,7 @@
     <h1> Add volunteers </h1>
 
     <form action='/project/<%=@project.id%>/volunteer' method= "post">
-      <input id="project_id" name= "project_id" type="hidden" value= "@volunteers.project_id">
+      <input id="project_id" name= "project_id" type="hidden" value= "<%= @project.id %>">
       <div class="form-group">
         <label for="volunteer_name"> Volunteer's Name: </label>
         <input id='name' name="name" type="text" class= "form-control">
