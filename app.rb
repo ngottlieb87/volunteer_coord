@@ -25,7 +25,9 @@ end
 
 get('/project/:id/volunteer') do
   @project = Project.find(params["id"].to_i())
+  @project_edit= Project.find(params.fetch("id").to_i())
   @volunteers = Volunteer.all()
+  @projects_list = Project.all()
   erb(:volunteers)
 end
 
@@ -53,6 +55,7 @@ end
 
 get('/project/:id/edit') do
   @project_edit= Project.find(params.fetch("id").to_i())
+  @volunteer_edit = Volunteer.find(params.fetch("id").to_i())
   erb(:edit_project)
 end
 
