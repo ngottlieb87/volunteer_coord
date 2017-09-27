@@ -1,5 +1,6 @@
 class Volunteer
-  attr_reader :name, :project_id, :id
+  attr_reader :name,:project_id, :id
+
 
   def initialize(attributes)
     @name = attributes[:name]
@@ -24,15 +25,24 @@ class Volunteer
   end
 
   def self.find(id)
-    result = DB.exec("SELECT * FROM volunteers WHERE id = #{id};")
-    name = result.first.fetch("name")
-    project_id = result.first().fetch("project_id").to_i
-    Volunteer.new({:name => name, :project_id => project_id, :id => id})
+    found_volunteer = nil
+    Volunteer.all().each do |volunteer|
+      if volunteer.id().==(id)
+        found_volunteer = volunteer
+      end
+    end
+    found_volunteer
   end
 
   def save()
     result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
     @id = result.first().fetch("id").to_i()
+  end
+
+  def update(attributes)
+    @name = attributes.fetch(:name)
+    @id = attributes.fetch(:id)
+    DB.exec("UPDATE volunteers SET name = '#{name}' WHERE id = #{@id};")
   end
 
 end

@@ -11,7 +11,6 @@ DB = PG.connect({:dbname => 'volunteer_tracker'})
 
 get('/') do
   @projects_list= Project.all()
-  @volunteers = Volunteer.all()
   erb(:index)
 end
 
@@ -25,9 +24,6 @@ end
 
 get('/project/:id/volunteer') do
   @project = Project.find(params["id"].to_i())
-  @project_edit= Project.find(params.fetch("id").to_i())
-  @volunteers = Volunteer.all()
-  @projects_list = Project.all()
   erb(:volunteers)
 end
 
@@ -41,9 +37,22 @@ post('/project/:id/volunteer') do
   erb(:volunteers)
 end
 
+get('/volunteer/:id') do
+  @project = Project.find(params["id"].to_i())
+  @volunteers = Volunteer.all()
+  @volunteer= Volunteer.find(params.fetch("id").to_i())
+  erb(:update_volunteer)
+end
+
+patch('/volunteer/:id/') do
+  name = params.fetch("name")
+  @volunteer_edit= Volunteer.find(params[:id])
+  @volunteer_edit.update({:name => name, :project_id => project_id})
+  erb(:index)
+end
+
 get('/project/:id/update') do
   @project_edit= Project.find(params.fetch("id").to_i())
-  @volunteers= Volunteer.all()
   erb(:details)
 end
 
@@ -55,7 +64,6 @@ end
 
 get('/project/:id/edit') do
   @project_edit= Project.find(params.fetch("id").to_i())
-  @volunteer_edit = Volunteer.find(params.fetch("id").to_i())
   erb(:edit_project)
 end
 
@@ -63,7 +71,6 @@ patch('/project/:id') do
   title = params.fetch("title")
   @project_edit= Project.find(params.fetch("id").to_i())
   @project_edit.update({:title => title})
-  @projects_list = Project.all()
   erb(:index)
 end
 
