@@ -32,6 +32,7 @@ _This webpage will let a volunteer event coordinator update projects, add volunt
 | Click on project and takes you to a new page where you will be able to add volunteers for the project |  "Tommy, Samantha, Dorothy" | "Tommy, Samantha, Dorothy"|
 | update project name | Potluck in the Park | Trash pick up => Potluck in the park |
 |delete project and its volunteers | delete button | *project removed from list*|
+|Update volunteer name on a project | Samantha | Dorothy -> Samantha|
 
 ## Support and contact details
 
