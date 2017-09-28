@@ -23,32 +23,34 @@ post('/') do
 end
 
 get('/project/:id/volunteer') do
-  @project = Project.find(params["id"].to_i())
+  @project = Project.find(params.fetch("id").to_i())
+  @volunteer = Volunteer.find(params.fetch("id").to_i())
   erb(:volunteers)
 end
 
 post('/project/:id/volunteer') do
-  @project = Project.find(params["id"].to_i())
+  @project = Project.find(params.fetch("id").to_i())
   name = params.fetch("name")
   project_id = params.fetch("project_id").to_i
   volunteer = Volunteer.new({:name => name, :project_id => project_id})
+  # binding.pry
   volunteer.save
   @volunteers= Volunteer.all()
   erb(:volunteers)
 end
 
 get('/volunteer/:id') do
-  @project = Project.find(params["id"].to_i())
-  @volunteers = Volunteer.all()
   @volunteer= Volunteer.find(params.fetch("id").to_i())
   erb(:update_volunteer)
 end
 
-patch('/volunteer/:id/') do
+patch('/volunteer/:id') do
+  @volunteer = Volunteer.find(params.fetch("id").to_i())
   name = params.fetch("name")
-  @volunteer_edit= Volunteer.find(params[:id])
-  @volunteer_edit.update({:name => name, :project_id => project_id})
-  erb(:index)
+  @id = @volunteer.id
+  project_id = @volunteer.project_id
+  @volunteer.update({:name => name})
+  redirect("/project/#{project_id}/volunteer")
 end
 
 get('/project/:id/update') do
@@ -71,7 +73,7 @@ patch('/project/:id') do
   title = params.fetch("title")
   @project_edit= Project.find(params.fetch("id").to_i())
   @project_edit.update({:title => title})
-  erb(:index)
+  redirect('/')
 end
 
 delete('/project/:id') do

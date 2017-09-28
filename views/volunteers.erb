@@ -4,7 +4,8 @@
   <h4> Volunteers currently on the project:</h4>
     <ul>
       <% @project.volunteers.each() do |volunteer| %>
-      <li>Name: <a href='/volunteer/<%=@project.id%>'><%= volunteer.name %></a></li>
+
+      <li>Name: <a href='/volunteer/<%= volunteer.id %>'><%= volunteer.name %></a></li>
       <% end %>
     </ul>
 
@@ -15,7 +16,7 @@
     <h1> Add volunteers </h1>
 
     <form action='/project/<%=@project.id%>/volunteer' method= "post">
-      <input id="project_id" name= "project_id" type="hidden" value=  '<%=@project.id%>'>
+      <!-- <input id="project_id" name= "project_id" type="hidden" value=  '<%=@project.id%>'> -->
       <div class="form-group">
         <label for="volunteer_name"> Volunteer's Name: </label>
         <input id='name' name="name" type="text" class= "form-control">

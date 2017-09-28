@@ -1,6 +1,6 @@
-<h1> <%=  %></h1>
+<h1><%= @volunteer.name %></h1>
 
-<form action="/project/<%= @project.id%>/volunteer/"  method="post">
+<form action="/volunteer/<%= @volunteer.id%>"  method="post">
   <div class= "form-group">
     <input name="_method" type = "hidden" value = "patch">
 

@@ -57,7 +57,7 @@ describe 'the volunteer detail page path', {:type => :feature} do
     project_id = test_project.id.to_i
     test_volunteer = Volunteer.new({:name => 'Jasmine', :project_id => project_id, :id => nil})
     test_volunteer.save
-    visit "/project/:id/volunteer"
+    visit "/project/#{project_id}/volunteer"
     click_link('Jasmine')
     fill_in('name', :with => 'Jane')
     click_button('Update Volunteer')
