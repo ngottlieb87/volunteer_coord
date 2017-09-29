@@ -31,7 +31,7 @@ end
 post('/project/:id/volunteer') do
   @project = Project.find(params.fetch("id").to_i())
   name = params.fetch("name")
-  project_id = params.fetch("project_id").to_i
+  project_id = params.fetch("id").to_i
   volunteer = Volunteer.new({:name => name, :project_id => project_id})
   volunteer.save
   @volunteers= Volunteer.all()

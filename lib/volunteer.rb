@@ -17,9 +17,9 @@ class Volunteer
     all_volunteers = []
     volunteers.each do |volunteer|
       name = volunteer["name"]
-      project_id = volunteer["project_id"].to_i
+      @project_id = volunteer["project_id"].to_i
       id = volunteer["id"].to_i
-      all_volunteers.push(Volunteer.new({:name => name, :id => id, :project_id => project_id}))
+      all_volunteers.push(Volunteer.new({:name => name, :id => id, :project_id => @project_id}))
     end
     all_volunteers
   end
@@ -39,8 +39,8 @@ class Volunteer
     projects = DB.exec("SELECT * FROM projects WHERE id = #{self.project_id};")
     projects.each do |project|
       title = project["title"]
-      id = project["id"].to_i
-      volunteer_proj.push(Project.new({:title => title, id: id}))
+      @id = project["id"].to_i
+      volunteer_proj.push(Project.new({:title => title, id: @id}))
     end
     volunteer_proj
   end
